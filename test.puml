@@ -1,0 +1,80 @@
+@startuml
+class com.pvn.MovieTicketBooking.Screen {
+~ ScreenType screenType
+~ List<Seat> seats
+~ int capacity
+~ List<Show> show
++ <<Create>> Screen(ScreenType,int)
++ void setScreenType(ScreenType)
++ void setSeats(List<Seat>)
++ void setCapacity(int)
+}
+
+
+class com.pvn.MovieTicketBooking.Show {
+- Movie movie
+~ Map<Integer,SeatStatus> seatStatusMap
+~ LocalDateTime startTime
+~ LocalDateTime endTime
++ <<Create>> Show(Movie,LocalDateTime,LocalDateTime,List<Seat>)
++ Movie getMovie()
++ Map<Integer,SeatStatus> getSeatStatusMap()
++ LocalDateTime getStartTime()
++ LocalDateTime getEndTime()
+}
+
+
+class com.pvn.MovieTicketBooking.Theater {
+~ int theaterId
+~ List<Screen> screenList
++ <<Create>> Theater(int,List<Screen>)
++ int getTheaterId()
++ List<Screen> getScreenList()
+}
+
+
+class com.pvn.MovieTicketBooking.Seat {
+- int seatId
+- SeatType type
++ <<Create>> Seat(int,SeatType)
++ int getSeatId()
++ SeatType getType()
+}
+
+
+enum com.pvn.MovieTicketBooking.ScreenType {
++  IMAX
++  STANDARD
++  VIP_LOUNGE
+}
+
+class com.pvn.MovieTicketBooking.City {
+~ String name
+~ List<Theater> theaters
++ <<Create>> City(String,List<Theater>)
++ String getName()
++ List<Theater> getTheaters()
+}
+
+
+class com.pvn.MovieTicketBooking.Movie {
+~ String title
+}
+
+enum com.pvn.MovieTicketBooking.SeatType {
++  SILVER
++  GOLD
++  PLATINUM
+- int price
+~ <<Create>> SeatType(int)
++ int getPrice()
+}
+
+
+enum com.pvn.MovieTicketBooking.SeatStatus {
++  AVAILABLE
++  LOCKED
++  BOOKED
+}
+
+@enduml
